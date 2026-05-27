@@ -14,14 +14,15 @@ import {
   Timer,
   Award,
   Settings2,
+  ArrowRight,
 } from "lucide-react";
 
 const PHONE_DISPLAY = "01829-403275";
 const PHONE_TEL = "tel:01829403275";
 const WHATSAPP = "https://wa.me/8801829403275";
-const MAPS_LINK = "https://maps.app.goo.gl/1SNLSJeAwDppa5yb8";
+const MAPS_LINK = "https://www.google.com/maps?q=23.6890,90.5720";
 const MAPS_EMBED =
-  "https://www.google.com/maps?q=Jom+Jom+Super+Market,+Kanchpur,+Narayanganj,+Bangladesh&output=embed";
+  "https://www.google.com/maps?q=23.6890,90.5720&z=16&output=embed";
 const ADDRESS = "Jom Jom Super Market, Kanchpur 1430, Narayanganj, Bangladesh";
 
 const localBusinessJsonLd = {
@@ -42,8 +43,8 @@ const localBusinessJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 23.6918,
-    longitude: 90.535,
+    latitude: 23.689,
+    longitude: 90.572,
   },
   areaServed: ["Kanchpur", "Sonargaon", "Rupganj", "Narayanganj"],
   openingHoursSpecification: [
@@ -89,34 +90,73 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const services = [
-  { icon: Zap, title: "AC Motor Repair", desc: "Single & three-phase AC induction motor diagnostics and repair." },
-  { icon: BatteryCharging, title: "DC Motor Repair", desc: "DC motor servicing, brush replacement, and armature work." },
-  { icon: RotateCw, title: "Motor Rewinding", desc: "Precision copper rewinding for all motor sizes and ratings." },
-  { icon: Cog, title: "Bearing Replacement", desc: "Genuine bearing replacement to restore smooth, quiet operation." },
-  { icon: Wrench, title: "Motor Parts Supply", desc: "Original spare parts: bearings, brushes, capacitors, contactors." },
-  { icon: Truck, title: "On-site Service", desc: "Field service for heavy industrial motors across Narayanganj." },
+type Service = {
+  icon: typeof Zap;
+  title: string;
+  desc: string;
+  span: string;
+};
+
+const services: Service[] = [
+  {
+    icon: Zap,
+    title: "AC Motor Repair",
+    desc: "Single & three-phase AC induction motor diagnostics and complete overhaul for industrial loads.",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    icon: RotateCw,
+    title: "Motor Rewinding",
+    desc: "Precision copper rewinding for all motor sizes.",
+    span: "md:col-span-2",
+  },
+  {
+    icon: BatteryCharging,
+    title: "DC Motor Repair",
+    desc: "Brush, armature & commutator service.",
+    span: "",
+  },
+  {
+    icon: Cog,
+    title: "Bearings",
+    desc: "Genuine bearing replacement.",
+    span: "",
+  },
+  {
+    icon: Wrench,
+    title: "Motor Parts Supply",
+    desc: "Original spares: bearings, brushes, capacitors, contactors.",
+    span: "md:col-span-2",
+  },
+  {
+    icon: Truck,
+    title: "On-site Service",
+    desc: "Field service for heavy industrial motors across Narayanganj.",
+    span: "md:col-span-2",
+  },
 ];
 
 const whyUs = [
-  { icon: Award, title: "20+ Years Experience", desc: "Two decades repairing industrial motors." },
+  { icon: Award, title: "20+ Years", desc: "Two decades repairing industrial motors." },
   { icon: Timer, title: "Fast Turnaround", desc: "Minimised downtime for your operations." },
   { icon: Settings2, title: "All Motor Sizes", desc: "From fractional HP to heavy industrial." },
-  { icon: ShieldCheck, title: "Genuine Parts", desc: "Only authentic, tested components used." },
+  { icon: ShieldCheck, title: "Genuine Parts", desc: "Only authentic, tested components." },
 ];
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative z-10 min-h-screen text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <div className="font-display text-base font-bold uppercase tracking-wide sm:text-lg">
-            <span className="text-primary">Mithila</span> Electric Center
+      <header className="sticky top-4 z-40 mx-auto mt-4 w-[calc(100%-2rem)] max-w-6xl">
+        <div className="glass-strong flex items-center justify-between rounded-full px-5 py-3 sm:px-6">
+          <div className="font-display text-base font-bold tracking-tight sm:text-lg">
+            <span className="text-primary">Mithila</span>{" "}
+            <span className="hidden sm:inline">Electric Center</span>
+            <span className="sm:hidden">Electric</span>
           </div>
           <a
             href={PHONE_TEL}
-            className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary"
+            className="flex items-center gap-2 rounded-full bg-primary/90 px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary hover:shadow-[0_0_24px_rgba(245,166,35,0.5)]"
           >
             <Phone className="h-4 w-4" aria-hidden />
             <span className="hidden sm:inline">{PHONE_DISPLAY}</span>
@@ -126,84 +166,102 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:py-28">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+      <section className="relative mx-auto max-w-6xl px-4 pb-16 pt-20 sm:pb-24 sm:pt-28">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="glass mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             M/S. Mithila Electric Center
-          </p>
-          <h1 className="font-display text-4xl font-bold uppercase leading-tight sm:text-5xl md:text-6xl">
-            Industrial Motor Repair in <span className="text-primary">Kanchpur</span>, Narayanganj
+          </div>
+          <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+            Industrial Motor Repair in{" "}
+            <span className="bg-gradient-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent">
+              Kanchpur
+            </span>
+            , Narayanganj
           </h1>
-          <p className="mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Industrial Motor Repair Specialists — Kanchpur, Narayanganj. Expert AC &amp; DC motor
-            repair, rewinding, and genuine motor parts trusted by factories across the region.
+          <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Expert AC &amp; DC motor repair, rewinding, and genuine motor parts —
+            trusted by factories across the region.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-display text-base font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
+              className="btn-glow hover:btn-glow-hover inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all"
             >
               <Phone className="h-5 w-5" aria-hidden />
               Call Now
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </a>
             <a
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-primary px-6 py-3 font-display text-base font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="glass-strong inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold text-foreground transition-all hover:bg-white/10"
             >
-              <MessageCircle className="h-5 w-5" aria-hidden />
+              <MessageCircle className="h-5 w-5 text-primary" aria-hidden />
               WhatsApp Us
             </a>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="border-b border-border py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="mb-12 max-w-2xl">
-            <h2 className="font-display text-3xl font-bold uppercase sm:text-4xl">Our Services</h2>
-            <p className="mt-3 text-muted-foreground">
-              Complete electric motor repair Kanchpur businesses depend on — AC DC motor repair,
-              rewinding, and parts supply.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map(({ icon: Icon, title, desc }) => (
+      {/* Services — Bento Grid */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <div className="mb-12 max-w-2xl">
+          <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            Our Services
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Complete electric motor repair Kanchpur businesses depend on — AC DC motor
+            repair, rewinding, and parts supply.
+          </p>
+        </div>
+        <div className="grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-4 md:grid-cols-4">
+          {services.map(({ icon: Icon, title, desc, span }, i) => (
+            <div
+              key={title}
+              className={`glass group relative overflow-hidden rounded-3xl p-7 transition-all duration-500 hover:bg-white/[0.08] ${span}`}
+            >
               <div
-                key={title}
-                className="group rounded-md border border-border bg-card p-6 transition-colors hover:border-primary"
-              >
-                <Icon className="h-9 w-9 text-primary" aria-hidden />
-                <h3 className="mt-4 font-display text-lg font-semibold uppercase">{title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+                aria-hidden
+                className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+              />
+              <div className="glass mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl">
+                <Icon className="h-6 w-6 text-primary" aria-hidden />
               </div>
-            ))}
-          </div>
+              <h3
+                className={`font-display font-semibold tracking-tight ${
+                  i === 0 ? "text-2xl sm:text-3xl" : "text-xl"
+                }`}
+              >
+                {title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="border-b border-border bg-card py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-12 font-display text-3xl font-bold uppercase sm:text-4xl">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <div className="glass-strong rounded-[2rem] p-8 sm:p-12">
+          <h2 className="mb-10 font-display text-4xl font-bold tracking-tight sm:text-5xl">
             Why Choose Us
           </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyUs.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="border-l-2 border-primary pl-5">
-                <Icon className="h-7 w-7 text-primary" aria-hidden />
-                <h3 className="mt-3 font-display text-lg font-semibold uppercase">{title}</h3>
+              <div
+                key={title}
+                className="glass rounded-2xl p-6 transition-all hover:bg-white/[0.08]"
+              >
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15">
+                  <Icon className="h-5 w-5 text-primary" aria-hidden />
+                </div>
+                <h3 className="mt-4 font-display text-lg font-semibold tracking-tight">
+                  {title}
+                </h3>
                 <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
               </div>
             ))}
@@ -212,76 +270,87 @@ function Index() {
       </section>
 
       {/* Service Area */}
-      <section className="border-b border-border py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="font-display text-3xl font-bold uppercase sm:text-4xl">Service Area</h2>
-              <p className="mt-4 text-muted-foreground">
-                We serve industrial clients across <strong className="text-foreground">Kanchpur</strong>,{" "}
-                <strong className="text-foreground">Sonargaon</strong>,{" "}
-                <strong className="text-foreground">Rupganj</strong>, and the wider{" "}
-                <strong className="text-foreground">Narayanganj</strong> district. Whether you need
-                motor rewinding Narayanganj factories rely on or quick on-site diagnostics, our
-                workshop is centrally located on the Dhaka–Chittagong highway at Kanchpur.
-              </p>
-              <a
-                href={MAPS_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wide text-primary hover:underline"
-              >
-                <MapPin className="h-4 w-4" aria-hidden />
-                View on Google Maps
-              </a>
-            </div>
-            <div className="overflow-hidden rounded-md border border-border">
-              <iframe
-                src={MAPS_EMBED}
-                title="M/S. Mithila Electric Center location at Jom Jom Super Market, Kanchpur, Narayanganj"
-                width="100%"
-                height="360"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block w-full"
-              />
-            </div>
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="glass-strong rounded-[2rem] p-8 sm:p-10">
+            <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              Service Area
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              We serve industrial clients across{" "}
+              <strong className="text-foreground">Kanchpur</strong>,{" "}
+              <strong className="text-foreground">Sonargaon</strong>,{" "}
+              <strong className="text-foreground">Rupganj</strong>, and the wider{" "}
+              <strong className="text-foreground">Narayanganj</strong> district.
+              Whether you need motor rewinding Narayanganj factories rely on or
+              quick on-site diagnostics, our workshop is centrally located on the
+              Dhaka–Chittagong highway at Kanchpur.
+            </p>
+            <a
+              href={MAPS_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary/15 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary/25"
+            >
+              <MapPin className="h-4 w-4" aria-hidden />
+              View on Google Maps
+            </a>
+          </div>
+          <div className="glass overflow-hidden rounded-[2rem] p-2">
+            <iframe
+              src={MAPS_EMBED}
+              title="M/S. Mithila Electric Center location at Jom Jom Super Market, Kanchpur, Narayanganj"
+              width="100%"
+              height="400"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="block w-full rounded-[1.5rem]"
+            />
           </div>
         </div>
       </section>
 
       {/* Contact */}
-      <section className="border-b border-border bg-card py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-10 font-display text-3xl font-bold uppercase sm:text-4xl">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <div className="glass-strong rounded-[2rem] p-8 sm:p-12">
+          <h2 className="mb-10 font-display text-4xl font-bold tracking-tight sm:text-5xl">
             Contact Us
           </h2>
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <Phone className="h-6 w-6 shrink-0 text-primary" aria-hidden />
+            <div className="space-y-5">
+              <div className="glass flex items-start gap-4 rounded-2xl p-5">
+                <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15">
+                  <Phone className="h-5 w-5 text-primary" aria-hidden />
+                </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Phone
                   </p>
-                  <a href={PHONE_TEL} className="font-display text-xl font-semibold hover:text-primary">
+                  <a
+                    href={PHONE_TEL}
+                    className="font-display text-xl font-semibold tracking-tight hover:text-primary"
+                  >
                     {PHONE_DISPLAY}
                   </a>
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <MapPin className="h-6 w-6 shrink-0 text-primary" aria-hidden />
+              <div className="glass flex items-start gap-4 rounded-2xl p-5">
+                <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15">
+                  <MapPin className="h-5 w-5 text-primary" aria-hidden />
+                </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Address
                   </p>
-                  <p className="mt-1 text-sm">{ADDRESS}</p>
+                  <p className="mt-1 text-sm leading-relaxed">{ADDRESS}</p>
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <Clock className="h-6 w-6 shrink-0 text-primary" aria-hidden />
+              <div className="glass flex items-start gap-4 rounded-2xl p-5">
+                <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15">
+                  <Clock className="h-5 w-5 text-primary" aria-hidden />
+                </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Business Hours
@@ -295,14 +364,14 @@ function Index() {
                 href={WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-display text-base font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
+                className="btn-glow hover:btn-glow-hover inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground transition-all sm:w-auto"
               >
                 <MessageCircle className="h-5 w-5" aria-hidden />
                 Message on WhatsApp
               </a>
             </div>
 
-            <div className="overflow-hidden rounded-md border border-border">
+            <div className="glass overflow-hidden rounded-[1.75rem] p-2">
               <iframe
                 src={MAPS_EMBED}
                 title="Map showing M/S. Mithila Electric Center, Kanchpur"
@@ -310,7 +379,7 @@ function Index() {
                 height="100%"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="block h-full min-h-[280px] w-full"
+                className="block h-full min-h-[320px] w-full rounded-[1.25rem]"
               />
             </div>
           </div>
@@ -318,9 +387,9 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="py-10">
-        <div className="mx-auto max-w-6xl px-4 text-center sm:text-left">
-          <div className="font-display text-lg font-bold uppercase tracking-wide">
+      <footer className="mx-auto max-w-6xl px-4 pb-12 pt-8">
+        <div className="glass rounded-[1.75rem] p-8 text-center sm:text-left">
+          <div className="font-display text-lg font-bold tracking-tight">
             <span className="text-primary">Mithila</span> Electric Center
           </div>
           <p className="mt-2 text-sm text-muted-foreground">{ADDRESS}</p>
