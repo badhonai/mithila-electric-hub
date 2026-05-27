@@ -20,9 +20,8 @@ import {
 const PHONE_DISPLAY = "01829-403275";
 const PHONE_TEL = "tel:01829403275";
 const WHATSAPP = "https://wa.me/8801829403275";
-const MAPS_LINK = "https://www.google.com/maps?q=23.6890,90.5720";
-const MAPS_EMBED =
-  "https://www.google.com/maps?q=23.6890,90.5720&z=16&output=embed";
+const MAPS_LINK = "https://www.google.com/maps/place/M%2FS.+Mithila+Electric+Center/@23.708811,90.528352,17z/data=!3m1!4b1!4m6!3m5!1s0x3755b7c7b897e937:0x5e2272e5052d37c7!8m2!3d23.708811!4d90.528352!16s%2Fg%2F11y477d70x?entry=ttu";
+const MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.880996841364!2d90.528352!3d23.708811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b7c7b897e937%3A0x5e2272e5052d37c7!2sM%2FS.%20Mithila%20Electric%20Center!5e0!3m2!1sen!2sbd!4v1716831168000!5m2!1sen!2sbd";
 const ADDRESS = "Jom Jom Super Market, Kanchpur 1430, Narayanganj, Bangladesh";
 
 const localBusinessJsonLd = {
@@ -43,19 +42,21 @@ const localBusinessJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 23.689,
-    longitude: 90.572,
+    latitude: 23.708811,
+    longitude: 90.528352,
   },
   areaServed: ["Kanchpur", "Sonargaon", "Rupganj", "Narayanganj"],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "09:00",
-      closes: "19:00",
+      opens: "08:00",
+      closes: "22:00",
     },
   ],
 };
+
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
