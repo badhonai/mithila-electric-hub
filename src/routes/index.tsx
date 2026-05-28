@@ -42,8 +42,8 @@ const localBusinessJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 23.708811,
-    longitude: 90.528352,
+    latitude: 23.7066414,
+    longitude: 90.5234144,
   },
   areaServed: ["Kanchpur", "Sonargaon", "Rupganj", "Narayanganj"],
   openingHoursSpecification: [
