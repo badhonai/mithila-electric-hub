@@ -20,8 +20,8 @@ import {
 const PHONE_DISPLAY = "01829-403275";
 const PHONE_TEL = "tel:01829403275";
 const WHATSAPP = "https://wa.me/8801829403275";
-const MAPS_LINK = "https://www.google.com/maps?q=23.708811,90.528352&z=18";
-const MAPS_EMBED = "https://maps.google.com/maps?q=23.708811,90.528352&z=18&hl=en&output=embed";
+const MAPS_LINK = "https://www.google.com/maps?q=23.7066414,90.5234144&z=18";
+const MAPS_EMBED = "https://maps.google.com/maps?q=23.7066414,90.5234144&z=18&hl=en&output=embed";
 const ADDRESS = "Jom Jom Super Market, Kanchpur 1430, Narayanganj, Bangladesh";
 
 const localBusinessJsonLd = {
@@ -42,8 +42,8 @@ const localBusinessJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 23.708811,
-    longitude: 90.528352,
+    latitude: 23.7066414,
+    longitude: 90.5234144,
   },
   areaServed: ["Kanchpur", "Sonargaon", "Rupganj", "Narayanganj"],
   openingHoursSpecification: [
